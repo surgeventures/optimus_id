@@ -1,0 +1,33 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/elixir:1.7.4
+    working_directory: ~/repo
+    steps:
+      # setup
+      - checkout
+      - run: mix local.hex --force
+      - run: mix local.rebar --force
+      - run: mix deps.get
+
+      # checks
+      - run: mix compile --warnings-as-errors
+      - run: mix format --check-formatted
+      - run: mix credo
+      - run: mix docs
+      - run: mix test
+
+      # dialyzer with caching
+      - run: elixir --version > /tmp/elixir-version
+      - restore_cache:
+          name: restore_cache priv/plts
+          keys:
+          - plt-{{ checksum "/tmp/elixir-version" }}-v1
+      - run: mix dialyzer --plt
+      - save_cache:
+          name: save_cache priv/plts
+          key: plt-{{ checksum "/tmp/elixir-version" }}-v1
+          paths:
+          - "~/repo/priv/plts"
+      - run: mix dialyzer --halt-exit-status
