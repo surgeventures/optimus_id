@@ -1,5 +1,9 @@
 # OptimusId
 
+[![license](https://img.shields.io/github/license/surgeventures/optimus_id.svg)](https://github.com/surgeventures/optimus_id/blob/master/LICENSE.md)
+[![build status](https://img.shields.io/circleci/project/github/surgeventures/optimus_id/master.svg)](https://circleci.com/gh/surgeventures/surgeventures/optimus_id/tree/master)
+[![Hex version](https://img.shields.io/hexpm/v/optimus_id.svg)](https://hex.pm/packages/optimus_id)
+
 *Obfuscate 32-bit numbers.*
 
 Transform your internal ids to obfuscated integers. Similar to [Hashids](https://hashids.org/),
