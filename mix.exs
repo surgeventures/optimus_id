@@ -2,6 +2,7 @@ defmodule OptimusId.MixProject do
   use Mix.Project
 
   @github_url "https://github.com/surgeventures/optimus_id"
+  @description "Obfuscates 32-bit numbers"
 
   def project do
     [
@@ -10,14 +11,23 @@ defmodule OptimusId.MixProject do
       elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      dialyzer: [
-        plt_add_apps: [:mix],
-        plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
-        list_unused_filters: true
+      name: "OptimusId",
+      description: @description,
+      package: [
+        maintainers: ["Karol Słuszniak"],
+        licenses: ["MIT"],
+        links: %{
+          "GitHub" => @github_url
+        }
       ],
       docs: [
         main: "OptimusId",
         source_url: @github_url
+      ],
+      dialyzer: [
+        plt_add_apps: [:mix],
+        plt_file: {:no_warn, "priv/plts/dialyzer.plt"},
+        list_unused_filters: true
       ]
     ]
   end
